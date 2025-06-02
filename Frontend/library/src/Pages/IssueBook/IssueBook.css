@@ -1,0 +1,84 @@
+.isuue_section{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+.issue_book {
+  background-color: #ffffff; /* White form background */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 25px 30px;
+  width: 400px;
+ margin: 20px 0px;
+}
+
+.issue_book h2 {
+  text-align: center;
+  color: #34495e; /* Dark blue-gray color */
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: bold;
+}
+.returnId{
+  color: rgba(255, 0, 0, 0.615);
+  font-size: 12px;
+}
+
+.form_section {
+  margin-bottom: 20px;
+}
+
+.form_section h3 {
+  color: #16a085; /* Teal for section headers */
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  border-bottom: 2px solid #ecf0f1; /* Light border */
+  padding-bottom: 5px;
+}
+
+.field {
+  margin-bottom: 15px;
+}
+
+.field p {
+  margin: 0 0 5px;
+  font-size: 14px;
+  color: #7f8c8d; /* Gray for labels */
+}
+
+.field input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #bdc3c7; /* Light gray border */
+  border-radius: 5px;
+  font-size: 14px;
+  color: #2c3e50; /* Dark gray for input text */
+  box-sizing: border-box;
+}
+
+.field input::placeholder {
+  color: #95a5a6; /* Placeholder gray */
+}
+
+.submit_btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #2980b9; /* Primary blue color */
+  color: #ffffff; /* White text */
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.submit_btn:hover {
+  background-color: #1c598a; /* Darker blue */
+}

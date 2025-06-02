@@ -1,0 +1,112 @@
+.Registered_Users_info {
+ 
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  
+}
+
+
+/* Styling for each user info block */
+.user_info {
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.user_info p {
+  margin: 5px 5px;
+  font-size: 16px;
+}
+
+.user_info p:first-child {
+  font-weight: bold;
+  color: #333;
+}
+
+.user_info p:last-child {
+  color: #555;
+}
+
+/* Styling for the user icon */
+.user_icon {
+  margin-right: 10px;
+  font-size: 20px;
+  color: #007bff;
+}
+
+/* Optional: Hover effect for user info block */
+.user_info:hover {
+  background-color: #e9f1f7;
+  cursor: pointer;
+}
+
+/* General styling for the section */
+section {
+  padding: 20px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+/* Styling for the Registered Users info container */
+.Registered_Users_info {
+  max-width: 90%;
+  margin: 0 auto;
+  background-color: transparent;
+ 
+  border-radius: 8px;
+  padding: 20px;
+  overflow-x: auto;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  background-color: transparent;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #007BFF;
+  color: #fff;
+  font-weight: bold;
+}
+
+td {
+  color: #333;
+
+}
+
+
+
+
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .Registered_Users_info {
+    padding: 15px;
+  }
+
+  th, td {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+.rg_user{
+  background-color: transparent;
+}

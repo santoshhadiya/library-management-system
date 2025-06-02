@@ -1,0 +1,179 @@
+/* Login Page Styles */
+.login-container {
+  width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.login-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.login-option {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: border-bottom-color 0.3s ease, color 0.3s ease;
+  color: #9e9e9e;
+  border-radius: 0px;
+  
+}
+.login-option:hover{
+  background-color: transparent;
+
+}
+.login-option.active {
+  border-bottom: 3px solid #007bff;
+  color: #007bff;
+}
+.login_user {
+  display: flex;
+  width: 20%;
+  justify-content: space-between;
+  
+}
+/* 
+.controller_btns{
+  display: flex;
+}
+
+.userLogo {
+  border: 1px solid #282A35;
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  color: rgb(255, 255, 255);
+  background-color: #282A35;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.userLogo:hover {
+  color: black;
+  background-color: white;
+  border: 1px solid #282A35;
+}
+.mode_btn{
+  background-color: black;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+.mode_btn:hover{
+  background-color: black;
+} */
+.controller_btns {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between mode button and user logo */
+}
+
+/* Mode Button */
+.mode_btn {
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease, color 0.3s ease;
+  height: 15px;
+  width: 18px;
+  
+}
+.mode_btn_container{
+  background-color: #E74C3C;
+  height: 100%;
+  width: 100%;
+  border-radius: 10%;
+  padding: 10px;
+}
+
+.mode_btn_container:hover {
+  background-color: white;
+}
+
+/* User Logo */
+.userLogo {
+  width: 40px;
+  height: 40px;
+  background-color: #E74C3C;
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10%;
+}
+
+.userLogo i {
+  font-size: 20px;
+  color: white;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+input {
+  width: 95%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0px 0px 4px rgba(0, 123, 255, 0.3);
+}
+
+.login-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 10px 0px;
+}
+.register_here:hover{
+  text-decoration: underline;
+  cursor: pointer;
+  color: purple;
+}
+.errMsg{
+  color: rgb(255, 255, 255);
+  background-color: rgba(255, 0, 0, 0.598);
+  border: 1px solid red;
+  border-radius: 20px;
+  padding: 10px;
+  text-align: center;
+}
