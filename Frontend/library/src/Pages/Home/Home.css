@@ -533,3 +533,122 @@ input::placeholder {
   background-color: var(--text-light);
   color: var(--dark-primary);
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  /* Header adjustments */
+  header {
+    padding: 0.8rem 1rem;
+    flex-direction: column;
+    gap: 0.8rem;
+    text-align: center;
+  }
+
+  .logo {
+    justify-content: center;
+  }
+
+  /* Navigation adjustments */
+  nav ul {
+    padding: 0.5rem 0;
+    gap: 0.5rem;
+    justify-content: flex-start;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  nav li {
+    padding: 0.5rem;
+  }
+
+  /* Main content adjustments */
+  main {
+    padding: 1rem;
+  }
+
+  main h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    display: block;
+  }
+
+  main h2::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Dashboard grid adjustments */
+  .dashboard {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  /* Contact form adjustments */
+  .inputs {
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .contact input,
+  .contact button {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .contact input {
+    border-radius: 8px 8px 0 0;
+    border-bottom: none;
+  }
+
+  .contact button {
+    border-radius: 0 0 8px 8px;
+    width: 100%;
+  }
+
+  /* Footer adjustments */
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .footer-section {
+    text-align: center;
+  }
+
+  .footer-section h3::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .logo h1 {
+    font-size: 1.2rem;
+  }
+
+  .logout-btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  nav a {
+    font-size: 0.8rem;
+  }
+
+  .card i {
+    font-size: 2rem;
+  }
+
+  .card p {
+    font-size: 1.1rem;
+  }
+}

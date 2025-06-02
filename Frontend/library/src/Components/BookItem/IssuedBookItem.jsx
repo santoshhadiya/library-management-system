@@ -13,7 +13,7 @@ const IssuedBookItem = ({
   returnBookId,
 }) => {
   const [book_img_identify, setBook_img_identify] = useState("");
-  const [isReturn,setIsReturn]=useState(false);
+  const [isReturn, setIsReturn] = useState(false);
   const navigate = useNavigate();
   /* useEffect(()=>{
     const books = JSON.parse(localStorage.getItem('react_books'));
@@ -35,36 +35,44 @@ const IssuedBookItem = ({
     fetchdata();
   }, []);
 
-  const validation=()=>{
-    setIsReturn((val)=>!val);
+  // Helper function to format ISO date strings to YYYY-MM-DD
+  const formatDate = (isoString) => {
+    const date = new Date(isoString);
+    // Format as YYYY-MM-DD
+    return date.toISOString().split("T")[0];
+  };
+
+
+  const validation = () => {
+    setIsReturn((val) => !val);
   }
 
-  const returnBookValidation=async()=>{
-    const response= await axios.post("https://lms-backend-ri7r.onrender.com/issue/remove",{
-      returnBookId:returnBookId
+  const returnBookValidation = async () => {
+    const response = await axios.post("https://lms-backend-ri7r.onrender.com/issue/remove", {
+      returnBookId: returnBookId
     })
-  if(response.data.val=="ok"){
+    if (response.data.val == "ok") {
 
-    //post for get quantity of book
-    const bookIddata = await axios.post("https://lms-backend-ri7r.onrender.com/book/getid", {
-      b_id: book_id,
-    });
-    // Update book quantity
-    const book_qua =Number(bookIddata.data);
-    const quaResponse = await axios.post("https://lms-backend-ri7r.onrender.com/book/quaplus", {
-      b_id: book_id,
-      b_quantity: book_qua,
-    });
+      //post for get quantity of book
+      const bookIddata = await axios.post("https://lms-backend-ri7r.onrender.com/book/getid", {
+        b_id: book_id,
+      });
+      // Update book quantity
+      const book_qua = Number(bookIddata.data);
+      const quaResponse = await axios.post("https://lms-backend-ri7r.onrender.com/book/quaplus", {
+        b_id: book_id,
+        b_quantity: book_qua,
+      });
 
-    if (quaResponse.data.val == "ok") {
-      
-      alert("Book removed successfully!");
-      navigate("/"); // Navigate to the home
+      if (quaResponse.data.val == "ok") {
+
+        alert("Book removed successfully!");
+        navigate("/"); // Navigate to the home
+      }
     }
-  }
-  else{
-    alert("Something went wrong. Please try again.")
-  }
+    else {
+      alert("Something went wrong. Please try again.")
+    }
   }
 
   return (
@@ -93,28 +101,27 @@ const IssuedBookItem = ({
                 <span>Student Name:</span> {s_name}
               </p>
               <p>
-                <span>Student ID: </span>
-                {s_id}
+                <span>Student ID: </span> {s_id}
               </p>
 
               <p>
-                <span>Issue Date:</span> {issue_date}
+                <span>Issue Date:</span> {formatDate(issue_date)}
               </p>
               <p>
-                <span>Return Date:</span>
-                {due_date}
+                <span>Return Date:</span> {formatDate(due_date)}
               </p>
               <button onClick={validation}>Return</button>
             </div>
+
           </div>
         </div>
         {
-          isReturn?(<div className="returnFild">
+          isReturn ? (<div className="returnFild">
             <input type="text" value={returnBookId} readOnly></input>
             <button onClick={returnBookValidation}>submit</button>
-          </div>):""
+          </div>) : ""
         }
-        
+
       </div>
     </>
   );

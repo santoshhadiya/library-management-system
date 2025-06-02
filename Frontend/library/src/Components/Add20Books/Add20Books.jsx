@@ -1,36 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useState } from "react";
+import axios from "axios";
 
 const Add20Books = () => {
+  const [status, setStatus] = useState("");
 
-   useEffect(() => {
+  
     const newBooks = [
-      {
-          b_id: 1201,
-          b_name: "The Invisible Man",
-          b_author: "H.G. Wells",
-          b_price: 280,
-          b_quantity: 15,
-          b_img: "https://covers.openlibrary.org/b/id/1-L.jpg",
-          b_desc: "A man discovers how to become invisible, leading to a descent into madness and crime."
-      },
-      {
-          b_id: 1202,
-          b_name: "Journey to the Center of the Earth",
-          b_author: "Jules Verne",
-          b_price: 350,
-          b_quantity: 18,
-          b_img: "https://covers.openlibrary.org/b/id/2-L.jpg",
-          b_desc: "A scientific expedition travels to the Earth's core and discovers strange and unknown creatures."
-      },
-      {
-          b_id: 1203,
-          b_name: "The War of the Worlds",
-          b_author: "H.G. Wells",
-          b_price: 310,
-          b_quantity: 20,
-          b_img: "https://covers.openlibrary.org/b/id/3-L.jpg",
-          b_desc: "Martians invade Earth, and humanity fights for survival against advanced alien technology."
-      },
+     
       {
           b_id: 1204,
           b_name: "The Time Machine",
@@ -220,15 +196,7 @@ const Add20Books = () => {
           b_img: "https://covers.openlibrary.org/b/id/24-L.jpg",
           b_desc: "A tragic love story set in Russian high society."
       },
-      {
-          b_id: 1225,
-          b_name: "The Brothers Grimm Fairy Tales",
-          b_author: "Jacob and Wilhelm Grimm",
-          b_price: 250,
-          b_quantity: 25,
-          b_img: "https://covers.openlibrary.org/b/id/25-L.jpg",
-          b_desc: "A collection of classic fairy tales by the famous German brothers."
-      },
+     
       {
           b_id: 1226,
           b_name: "Les Misérables",
@@ -256,15 +224,7 @@ const Add20Books = () => {
           b_img: "https://covers.openlibrary.org/b/id/28-L.jpg",
           b_desc: "A modernist novel that explores the inner thoughts of its characters in Dublin."
       },
-      {
-          b_id: 1229,
-          b_name: "The Iliad",
-          b_author: "Homer",
-          b_price: 320,
-          b_quantity: 18,
-          b_img: "https://covers.openlibrary.org/b/id/29-L.jpg",
-          b_desc: "An epic tale of the Trojan War and the wrath of Achilles."
-      },
+      
       {
           b_id: 120,
           b_name: "Satya Na Prayogo Athva Atmakatha",
@@ -275,25 +235,39 @@ const Add20Books = () => {
           b_desc: "The book covers Gandhi's life from his early childhood to 1921, including his childhood, education, experiences in South Africa, and his work for political awakening."
       }
   ];
-  
-      let books = [];
+
+  const addBooksToDatabase = async () => {
+    setStatus("Adding books...");
+    const MongoURL = "https://lms-backend-ri7r.onrender.com/book";
+    let successCount = 0;
+    let failCount = 0;
+
+    for (let book of newBooks) {
       try {
-        const storedBooks = localStorage.getItem("react_books");
-        books = storedBooks ? JSON.parse(storedBooks) : [];
-      } catch (error) {
-        console.error("Invalid JSON in Local Storage:", error);
-        books = [];
+        await axios.post(MongoURL, book);
+        console.log(`✅ Book added: ${book.b_name}`);
+        successCount++;
+      } catch (err) {
+        console.error(`❌ Failed to add ${book.b_name}:`, err.message);
+        failCount++;
       }
-  
-      const updatedBooks = books.concat(newBooks);
-  
-      localStorage.setItem("react_books", JSON.stringify(updatedBooks));
-      console.log(books);
-    }, []);
+    }
+
+    setStatus(`✅ Done: ${successCount} added, ❌ ${failCount} failed.`);
+  };
 
   return (
-    <div>Add20Books</div>
-  )
-}
+    <div className="p-4">
+      <h2 className="text-xl font-bold">📚 Add Books to Database</h2>
+      <button
+        onClick={addBooksToDatabase}
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+      >
+        Add Books
+      </button>
+      <p className="mt-2">{status}</p>
+    </div>
+  );
+};
 
-export default Add20Books
+export default Add20Books;
