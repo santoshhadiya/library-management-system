@@ -7,7 +7,7 @@ const userrouter=require("./Router/userRouter");
 const issueBookRouter=require("./Router/issueBookRouter");
 const adminRouter=require("./Router/adminRouter");
 
-
+const PORT= process.env.PORT || 5000;
 const app = express();
 app.use(cors())
 app.use(express.json());
@@ -24,6 +24,6 @@ mongoose
  app.use("/issue", issueBookRouter);
  app.use("/admin", adminRouter);
 
-app.listen(8001, () => {
-  console.log("Runnig At port:8001");
+app.listen(PORT, () => {
+  console.log("Runnig At port:" + PORT);
 });

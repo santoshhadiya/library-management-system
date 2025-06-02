@@ -22,7 +22,7 @@ const RetriveIssuedBooks = () => {
 
   useEffect(()=>{
     const fetchBook=async()=>{
-      axios.get("http://localhost:8001/issue")
+      axios.get("https://lms-backend-ri7r.onrender.com/issue")
       .then((res)=>{setBooks(res.data),setFilterUser(res.data)})
       .catch((err)=>{console.log(err)});
     }

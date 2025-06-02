@@ -49,7 +49,7 @@ const IssueBook = () => {
       return;
     }
    //post for get quantity of book
-    const bookIddata = await axios.post("http://localhost:8001/book/getid", {
+    const bookIddata = await axios.post("https://lms-backend-ri7r.onrender.com/book/getid", {
       b_id: bookIdValue,
     });
     // Update book quantity
@@ -60,7 +60,7 @@ const IssueBook = () => {
     }
 
     // Fetch user data
-    const userData = await axios.post("http://localhost:8001/user/userid", {
+    const userData = await axios.post("https://lms-backend-ri7r.onrender.com/user/userid", {
       s_id: id,
     });
     if (!userData.data.name) {
@@ -75,7 +75,7 @@ const IssueBook = () => {
     const { name, email, department } = userData.data;
 
     // Issue the book
-    const response = await axios.post("http://localhost:8001/issue", {
+    const response = await axios.post("https://lms-backend-ri7r.onrender.com/issue", {
       name,
       s_id: id,
       email,
@@ -93,7 +93,7 @@ const IssueBook = () => {
     }
 
     
-    const quaResponse = await axios.post("http://localhost:8001/book/qua", {
+    const quaResponse = await axios.post("https://lms-backend-ri7r.onrender.com/book/qua", {
       b_id: bookIdValue,
       b_quantity: book_qua,
     });

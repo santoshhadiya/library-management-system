@@ -27,7 +27,7 @@ const RegisterPage = () => {
     e.preventDefault();
     let respons = "";
     if (!isAdmin) {
-      respons = await axios.post("http://localhost:8001/user", {
+      respons = await axios.post("https://lms-backend-ri7r.onrender.com/user", {
         name: formData.name,
         email: formData.email,
         password: formData.password,
@@ -35,7 +35,7 @@ const RegisterPage = () => {
         department: formData.department,
       })
     } else {
-      respons = await axios.post("http://localhost:8001/admin", {
+      respons = await axios.post("https://lms-backend-ri7r.onrender.com/admin", {
         name: formData.name,
         email: formData.email,
         password: formData.password,

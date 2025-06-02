@@ -18,7 +18,7 @@ const RegisteredUsers = () => {
  */
     const fetchdata = async () => {
       await axios
-        .get("http://localhost:8001/user")
+        .get("https://lms-backend-ri7r.onrender.com/user")
         .then((res) => {
           setUser(res.data), setFilterUser(res.data);
         })
@@ -27,7 +27,7 @@ const RegisteredUsers = () => {
         });
 
       await axios
-        .get("http://localhost:8001/admin")
+        .get("https://lms-backend-ri7r.onrender.com/admin")
         .then((res) => {
           setAdmin(res.data);
         })
