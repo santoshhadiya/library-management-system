@@ -27,7 +27,7 @@ const IssuedBookItem = ({
 
   useEffect(() => {
     const fetchdata = async () => {
-      const response = await axios.post("http://localhost:8001/book/img", {
+      const response = await axios.post("https://lms-backend-ri7r.onrender.com/book/img", {
         b_id: book_id,
       });
       setBook_img_identify(response.data);
@@ -40,18 +40,18 @@ const IssuedBookItem = ({
   }
 
   const returnBookValidation=async()=>{
-    const response= await axios.post("http://localhost:8001/issue/remove",{
+    const response= await axios.post("https://lms-backend-ri7r.onrender.com/issue/remove",{
       returnBookId:returnBookId
     })
   if(response.data.val=="ok"){
 
     //post for get quantity of book
-    const bookIddata = await axios.post("http://localhost:8001/book/getid", {
+    const bookIddata = await axios.post("https://lms-backend-ri7r.onrender.com/book/getid", {
       b_id: book_id,
     });
     // Update book quantity
     const book_qua =Number(bookIddata.data);
-    const quaResponse = await axios.post("http://localhost:8001/book/quaplus", {
+    const quaResponse = await axios.post("https://lms-backend-ri7r.onrender.com/book/quaplus", {
       b_id: book_id,
       b_quantity: book_qua,
     });
