@@ -31,12 +31,12 @@ const Login = () => {
 
     let respons="";
     if (user === "admin") {
-        respons = await axios.post("http://localhost:8001/admin/login", {
+        respons = await axios.post("https://lms-backend-ri7r.onrender.com/admin/login", {
         email: formData.email,
         password: formData.password,
       })
     } else {
-        respons = await axios.post("http://localhost:8001/user/login", {
+        respons = await axios.post("https://lms-backend-ri7r.onrender.com/user/login", {
         email: formData.email,
         password: formData.password,
       })
