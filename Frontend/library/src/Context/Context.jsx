@@ -10,8 +10,8 @@ const Context = ({ children }) => {
   const [isregister, setIsregister] = useState(true);
   const [mode, setMode] = useState("light");
 
-  const BackendURL = "http://localhost:5000";
-  const MongoURL = "http://localhost:5000/book";
+  const BackendURL = "https://lms-backend-ri7r.onrender.com";
+  const MongoURL = "https://lms-backend-ri7r.onrender.com/book";
 
   //  Check token on app load
   useEffect(() => {
