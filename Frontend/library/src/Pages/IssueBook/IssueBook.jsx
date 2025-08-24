@@ -6,6 +6,8 @@ import { userContext } from "../../Context/Context";
 import axios from "axios";
 
 function generateUniqueText() {
+ 
+
   const text = "qwer1tyuiopa661sd@#$fghjkl$zxcvb2345@637nmQWhd$kERTYUIOPAS731DFGHJKLZ649XCVBNM123456789@#$";
   const randomNumber = Math.floor(Math.random() * 1000);
   const startIndex = Math.floor(Math.random() * (text.length - 10));
@@ -17,7 +19,7 @@ function generateUniqueText() {
 
 
 const IssueBook = () => {
-  const { user ,mode} = useContext(userContext);
+  const { user ,mode, BackendURL} = useContext(userContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -49,7 +51,7 @@ const IssueBook = () => {
       return;
     }
    //post for get quantity of book
-    const bookIddata = await axios.post("https://lms-backend-ri7r.onrender.com/book/getid", {
+    const bookIddata = await axios.post(`${BackendURL}/book/getid`, {
       b_id: bookIdValue,
     });
     // Update book quantity
@@ -60,7 +62,7 @@ const IssueBook = () => {
     }
 
     // Fetch user data
-    const userData = await axios.post("https://lms-backend-ri7r.onrender.com/user/userid", {
+    const userData = await axios.post(`${BackendURL}/user/userid`, {
       s_id: id,
     });
     if (!userData.data.name) {
@@ -75,7 +77,7 @@ const IssueBook = () => {
     const { name, email, department } = userData.data;
 
     // Issue the book
-    const response = await axios.post("https://lms-backend-ri7r.onrender.com/issue", {
+    const response = await axios.post(`${BackendURL}/issue`, {
       name,
       s_id: id,
       email,
@@ -93,7 +95,7 @@ const IssueBook = () => {
     }
 
     
-    const quaResponse = await axios.post("https://lms-backend-ri7r.onrender.com/book/qua", {
+    const quaResponse = await axios.post(`${BackendURL}/book/qua`, {
       b_id: bookIdValue,
       b_quantity: book_qua,
     });

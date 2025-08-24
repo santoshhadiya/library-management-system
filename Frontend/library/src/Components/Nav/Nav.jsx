@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import Header from "./Header";
 
 export const Nav = () => {
-  const {  user, activeLink } = useContext(userContext);
-  
+  const { user, activeLink } = useContext(userContext);
+
   return (
     <>
-      <Header/>
+      <Header />
       <nav>
         <ul>
           <Link to="/">
@@ -17,7 +17,7 @@ export const Nav = () => {
             </li>
           </Link>
           <Link to="/books">
-            <li className={activeLink == "books" ? "Active_class" : ""}>
+            <li className={activeLink === "books" ? "Active_class" : ""}>
               <a href="#">Books Listed</a>
             </li>
           </Link>
@@ -40,7 +40,8 @@ export const Nav = () => {
             </li>
           </Link>
 
-          {user === "admin" && (
+          {/* ✅ check role instead of user string */}
+          {user?.role === "admin" && (
             <>
               <Link to="/addbook">
                 <li>

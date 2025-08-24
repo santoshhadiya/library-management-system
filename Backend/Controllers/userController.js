@@ -1,6 +1,7 @@
 /* const { v4: uuidv4 } = require("uuid");
 const { setUser } = require("../service/auth"); */
 const USER = require("../Model/userModel");
+const {setUser}=require("../service/auth")
 
 
 async function handleUserSignup(req, res) {
@@ -25,13 +26,15 @@ async function handleUserLogin(req, res) {
   const { email, password } = req.body;
   const user = await USER.findOne({ email, password });
 
-  if (!user)
-    return res.send("notFound");
+  if (!user) return res.status(401).json({ message: "Invalid credentials" });
 
- 
- /*  const token=setUser(user);
-  res.cookie("uid", token); */
-  return res.json(user);
+  // ✅ create token
+  const token = setUser(user);
+
+  return res.json({ 
+    message: "Login successful", 
+    token 
+  });
 }
 
 

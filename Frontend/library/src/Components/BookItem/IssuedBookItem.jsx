@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { userContext } from "../../Context/Context";
 
 const IssuedBookItem = ({
   due_date,
@@ -15,19 +16,13 @@ const IssuedBookItem = ({
   const [book_img_identify, setBook_img_identify] = useState("");
   const [isReturn, setIsReturn] = useState(false);
   const navigate = useNavigate();
-  /* useEffect(()=>{
-    const books = JSON.parse(localStorage.getItem('react_books'));
 
-   books.forEach(function (book) {
-      if (book_id == book.b_id) {
-        setBook_img_identify(book.b_img)
-      }
-   });
-  },[]) */
+   const {BackendURL}=useContext(userContext)
+
 
   useEffect(() => {
     const fetchdata = async () => {
-      const response = await axios.post("https://lms-backend-ri7r.onrender.com/book/img", {
+      const response = await axios.post(`${BackendURL}/book/img`, {
         b_id: book_id,
       });
       setBook_img_identify(response.data);
@@ -35,7 +30,7 @@ const IssuedBookItem = ({
     fetchdata();
   }, []);
 
-  // Helper function to format ISO date strings to YYYY-MM-DD
+  // date strings to YYYY-MM-DD
   const formatDate = (isoString) => {
     const date = new Date(isoString);
     // Format as YYYY-MM-DD
@@ -48,18 +43,18 @@ const IssuedBookItem = ({
   }
 
   const returnBookValidation = async () => {
-    const response = await axios.post("https://lms-backend-ri7r.onrender.com/issue/remove", {
+    const response = await axios.post(`${BackendURL}/issue/remove`, {
       returnBookId: returnBookId
     })
     if (response.data.val == "ok") {
 
       //post for get quantity of book
-      const bookIddata = await axios.post("https://lms-backend-ri7r.onrender.com/book/getid", {
+      const bookIddata = await axios.post(`${BackendURL}/book/getid`, {
         b_id: book_id,
       });
       // Update book quantity
       const book_qua = Number(bookIddata.data);
-      const quaResponse = await axios.post("https://lms-backend-ri7r.onrender.com/book/quaplus", {
+      const quaResponse = await axios.post(`${BackendURL}/book/quaplus`, {
         b_id: book_id,
         b_quantity: book_qua,
       });
@@ -77,52 +72,33 @@ const IssuedBookItem = ({
 
   return (
     <>
-      <div className="book_info">
-        <div className="boxOfReturnBooks">
-          <div className="box_img_issued">
-            <img
-              src={
-                book_img_identify
-                  ? book_img_identify
-                  : "https://static.thenounproject.com/png/3411733-200.png"
-              }
-              alt="Book Cover"
-            />
-            <p>
-              Return ID: <span className="returnId">{returnBookId}</span>
-            </p>
-          </div>
-          <div>
-            <div className="details">
-              <p>
-                <span>Book ID:</span> {book_id}
-              </p>
-              <p>
-                <span>Student Name:</span> {s_name}
-              </p>
-              <p>
-                <span>Student ID: </span> {s_id}
-              </p>
+     <div className="book_info">
+  <div className="boxOfReturnBooks">
+    <div className="box_img_issued">
+      <img
+        src={book_img_identify ? book_img_identify : "https://static.thenounproject.com/png/3411733-200.png"}
+        alt="Book Cover"
+      />
+      <p>Return ID: <span className="returnId">{returnBookId}</span></p>
+    </div>
+    
+    <div className="details">
+      <p><span>Book ID:</span> {book_id}</p>
+      <p><span></span> {s_name}</p>
+      <p><span>ID:</span> {s_id}</p>
+      <p><span>From:</span> {formatDate(issue_date)}</p>
+      <p><span>To:</span> {formatDate(due_date)}</p>
+      <button onClick={validation}>Return</button>
+    </div>
+  </div>
 
-              <p>
-                <span>Issue Date:</span> {formatDate(issue_date)}
-              </p>
-              <p>
-                <span>Return Date:</span> {formatDate(due_date)}
-              </p>
-              <button onClick={validation}>Return</button>
-            </div>
-
-          </div>
-        </div>
-        {
-          isReturn ? (<div className="returnFild">
-            <input type="text" value={returnBookId} readOnly></input>
-            <button onClick={returnBookValidation}>submit</button>
-          </div>) : ""
-        }
-
-      </div>
+  {isReturn && (
+    <div className="returnFild">
+      <input type="text" value={returnBookId} readOnly />
+      <button onClick={returnBookValidation}>Submit</button>
+    </div>
+  )}
+</div>
     </>
   );
 };

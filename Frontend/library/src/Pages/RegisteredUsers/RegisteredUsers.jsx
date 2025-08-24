@@ -11,14 +11,14 @@ const RegisteredUsers = () => {
   const [filterUser, setFilterUser] = useState([]);
   const [qury, setQury] = useState([]);
 
-  const {mode}=useContext(userContext);
+  const {mode,BackendURL}=useContext(userContext);
   useEffect(() => {
     /* const userData = JSON.parse(localStorage.getItem("issueBooksData")) || [];
     setUser(userData);
  */
     const fetchdata = async () => {
       await axios
-        .get("https://lms-backend-ri7r.onrender.com/user")
+        .get(`${BackendURL}/user`)
         .then((res) => {
           setUser(res.data), setFilterUser(res.data);
         })
@@ -27,7 +27,7 @@ const RegisteredUsers = () => {
         });
 
       await axios
-        .get("https://lms-backend-ri7r.onrender.com/admin")
+        .get(`${BackendURL}/admin`)
         .then((res) => {
           setAdmin(res.data);
         })

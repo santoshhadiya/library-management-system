@@ -1,3 +1,4 @@
+@import "tailwindcss";
 #root {
   height: max-content;
   width: 100%;

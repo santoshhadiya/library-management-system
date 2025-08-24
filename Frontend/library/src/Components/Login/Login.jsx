@@ -4,17 +4,15 @@ import { userContext } from "../../Context/Context";
 import Header from "../Nav/Header";
 import RegisterPage from "../../Pages/RegisterPage/RegisterPage";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+
 
 const Login = () => {
-  const { user, setUser, setIslogin, isregister, setIsregister } = useContext(userContext);
+  const { user, setUser, setIslogin, isregister, setIsregister, BackendURL } = useContext(userContext);
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [errMsg, setErrMsg] = useState("");
-  const [loading, setLoading] = useState(false); // 👈 loading state
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,16 +21,12 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true); // 👈 Start loading
+    setLoading(true);
 
     try {
-      let response;
-      const endpoint =
-        user === "admin"
-          ? "https://lms-backend-ri7r.onrender.com/admin/login"
-          : "https://lms-backend-ri7r.onrender.com/user/login";
+      const endpoint = user === "admin" ? `${BackendURL}/admin/login` : `${BackendURL}/user/login`;
 
-      response = await axios.post(endpoint, {
+      const response = await axios.post(endpoint, {
         email: formData.email,
         password: formData.password,
       });
@@ -42,6 +36,17 @@ const Login = () => {
         setIslogin(false);
       } else {
         setErrMsg("");
+
+        // Save token in localStorage
+        const token = response.data.token;
+        localStorage.setItem("token", token);
+
+        // Decode token for user info
+        const decoded = jwtDecode(token);
+        console.log("Decoded User Info:", decoded);
+
+        //  Update context 
+        setUser(decoded);
         setIslogin(true);
       }
     } catch (err) {
@@ -49,7 +54,7 @@ const Login = () => {
       setIslogin(false);
     }
 
-    setLoading(false); // 👈 End loading
+    setLoading(false);
   };
 
   return (

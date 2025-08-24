@@ -1,32 +1,38 @@
 import React, { useContext } from "react";
 import { userContext } from "../../Context/Context";
-import { Link } from "react-router-dom";
 
 const Header = ({ loginPage }) => {
-  const { setIslogin,mode,setMode } = useContext(userContext);
+  const { setIslogin, mode, setMode, user } = useContext(userContext);
+
   const handleLogin = () => {
-    confirm("Do you want to Log Out") ? setIslogin(false) : "";
+    if (confirm("Do you want to Log Out")) {
+      localStorage.removeItem("token"); // clear token
+      setIslogin(false);
+    }
   };
 
-  const handleMode=()=>{
-    mode=="light"?setMode("dark"):setMode("light")
-  }
+  const handleMode = () => {
+    mode === "light" ? setMode("dark") : setMode("light");
+  };
+
   return (
-    <header>
+    <header className="header">
       <div className="logo">
         <i className="fas fa-book"></i>
         <h1>Online Library Management System</h1>
       </div>
+
       {loginPage ? (
-        <>
-        
-        </>
+        <></>
       ) : (
-        
+        <div className="nav-right">
+          {user && <span className="user-email">{user.email}</span>}
+
           <button onClick={handleLogin} className="logout-btn">
-            LOG ME OUT
+            LOG OUT
           </button>
-       
+        </div>
+
       )}
     </header>
   );

@@ -4,7 +4,7 @@ import { userContext } from "../../Context/Context";
 import axios from "axios";
 
 const RegisterPage = () => {
-  const { setIsregister, mode } = useContext(userContext);
+  const { setIsregister, mode,BackendURL } = useContext(userContext);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(false); // 👈 Loading state
 
@@ -38,12 +38,12 @@ const RegisterPage = () => {
       };
 
       if (!isAdmin) {
-        response = await axios.post("https://lms-backend-ri7r.onrender.com/user", {
+        response = await axios.post(`${BackendURL}/user`, {
           ...data,
           s_id: formData.s_id,
         });
       } else {
-        response = await axios.post("https://lms-backend-ri7r.onrender.com/admin", {
+        response = await axios.post(`${BackendURL}/admin`, {
           ...data,
           a_id: formData.s_id,
         });
