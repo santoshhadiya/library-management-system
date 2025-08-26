@@ -8,16 +8,13 @@ const adminSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      
       unique: true,
     },
     password: {
       type: String,
-      
     },
     a_id:{
       type: Number,
-     
     },
     department:{
       type: String,

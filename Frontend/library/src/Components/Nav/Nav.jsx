@@ -34,11 +34,7 @@ export const Nav = () => {
               <a href="#">Issue Books</a>
             </li>
           </Link>
-          <Link to="/regusers">
-            <li>
-              <a href="#">Reg Students</a>
-            </li>
-          </Link>
+
           <Link to="/issuedbooks">
             <li>
               <a href="#">Issued Books</a>
@@ -52,7 +48,11 @@ export const Nav = () => {
                   <a href="#">Add Book</a>
                 </li>
               </Link>
-
+              <Link to="/regusers">
+                <li>
+                  <a href="#">Reg Students</a>
+                </li>
+              </Link>
               <li>
                 <a href="#">Books Return</a>
               </li>

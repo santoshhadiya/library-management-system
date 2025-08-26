@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { userContext } from "../../Context/Context";
 
 const AdminDashboard = () => {
+  const { user } = useContext(userContext)
   return (
     <>
-      <h2>Admin Dashboard</h2>
+      <h2>Hello — Admin {user.name}</h2>
       <div className="dashboard">
         <a>
           <Link to="/books">
@@ -54,11 +56,15 @@ const AdminDashboard = () => {
             </div>
           </Link>
         </a>
-        <div className="card yellow">
-          <i className="fas fa-recycle"></i>
-          <p>Books Returned</p>
-          <div className="coming-soon">Coming Soon</div>
-        </div>
+        <a>
+          <Link to="/historyData">
+            <div className="card yellow">
+              <i className="fas fa-recycle"></i>
+              <p>History</p>
+              <div className="coming-soon">Coming Soon</div>
+            </div>
+          </Link>
+        </a>
         <a>
           <Link to="/addbook">
             <div className="card green">

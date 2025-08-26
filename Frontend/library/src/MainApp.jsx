@@ -12,6 +12,7 @@ import AddBook from "./Pages/AddBook/AddBook";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import BooksReturn from "./Pages/BooksReturn/BooksReturn";
 import BookInfo from "./Pages/BookInfo/BookInfo";
+import HistoryData from "./Pages/HistoryData/HistoryData";
 
 
 const MainApp = () => {
@@ -31,6 +32,7 @@ const MainApp = () => {
           <Route path="/addbook" element={<AddBook/>}/>
           <Route path="/register" element={<RegisterPage/>}/>
           <Route path="/bookinfo" element={<BookInfo/>}/>
+          <Route path="/historyData" element={<HistoryData/>}/>
         </Routes>
       </BrowserRouter>) : <Login />}
 

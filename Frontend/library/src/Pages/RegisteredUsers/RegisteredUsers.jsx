@@ -67,7 +67,7 @@ const RegisteredUsers = () => {
                 <td>ID</td>
                 <td>Name</td>
                 <td>Email</td>
-                <td>Password</td>
+                {/* <td>Password</td> */}
               </tr>
             </thead>
             {filterUser.map((val) => {
@@ -90,7 +90,7 @@ const RegisteredUsers = () => {
                 <td>ID</td>
                 <td>Name</td>
                 <td>Email</td>
-                <td>Password</td>
+               {/*  <td>Password</td> */}
               </tr>
             </thead>
             {admin.map((val) => {

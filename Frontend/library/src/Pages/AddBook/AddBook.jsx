@@ -7,7 +7,7 @@ import { userContext } from "../../Context/Context";
 
 const AddBook = () => {
 
-  const { MongoURL, mode } = useContext(userContext)
+  const { MongoURL, mode, BackendURL, user } = useContext(userContext)
   const navigate = useNavigate();
 
   const name = useRef();
@@ -60,7 +60,8 @@ const AddBook = () => {
     })
 
     console.log(newBook);
-    alert("Books Added Succesfully!");
+    alert(`Books Added Succesfully! `);
+    
     name.current.value = "";
     id.current.value = "";
     auth_name.current.value = "";
@@ -69,6 +70,14 @@ const AddBook = () => {
     que.current.value = "";
     img.current.value = "";
     navigate("/books");
+    
+   if(respons){
+     const res = await axios.post(`${BackendURL}/hist/add`, {
+      a_id: user.id,
+      b_id: b_id,
+      date: Date.now()
+    })
+   }
   };
 
   return (
@@ -81,27 +90,27 @@ const AddBook = () => {
           </div>
           <div className="book_add_form">
             <form onSubmit={handleFormValidation}>
-            <div className="row1">
-              <div>
-                <label htmlFor="book_name">Book Name:</label>
-                <input
-                  ref={name}
-                  type="text"
-                  id="book_name"
-                  name="book_name"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="book_id">Book ID:</label>
-                <input
-                  ref={id}
-                  type="number"
-                  id="book_id"
-                  name="book_id"
-                  required
-                />
-              </div>
+              <div className="row1">
+                <div>
+                  <label htmlFor="book_name">Book Name:</label>
+                  <input
+                    ref={name}
+                    type="text"
+                    id="book_name"
+                    name="book_name"
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="book_id">Book ID:</label>
+                  <input
+                    ref={id}
+                    type="number"
+                    id="book_id"
+                    name="book_id"
+                    required
+                  />
+                </div>
               </div>
               <label htmlFor="author_name">Author Name:</label>
               <input

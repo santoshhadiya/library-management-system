@@ -12,9 +12,9 @@ const UserItem = ({id,name,email,password}) => {
   <td>
   {email}
   </td>
-  <td>
+ {/*  <td>
 {password}
-  </td>
+  </td> */}
     </tr> 
     </>
   )

@@ -1,32 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { userContext } from "../../Context/Context";
 
 const StudentDashboard = () => {
+  const {user}=useContext(userContext)
   return (
     <>
-      <h2>Student Dashboard</h2>
+      <h2>Welcome, {user.name}</h2>
       <div className="dashboard">
         <a>
           <Link to="/books">
             <div className="card green">
               <i className="fas fa-book"></i>
-              <p>Books Listed</p>
+              <p>Books</p>
             </div>
           </Link>
         </a>
-        <a>
+        {/* <a>
           <Link to="/issue">
             <div className="card blue">
               <i className="fas fa-list"></i>
               <p>Issue Book</p>
             </div>
           </Link>
-        </a>
+        </a> */}
         <a>
           <Link to="/issuedbooks">
             <div className="card green">
               <i className="fa-solid fa-circle-up"></i>
-              <p>Issued Books</p>
+              
+              <p>{user.role=="user"?"Your":""} Issued Books</p>
             </div>
           </Link>
         </a>
@@ -45,14 +48,7 @@ const StudentDashboard = () => {
             <div className="coming-soon">Coming Soon</div>
           </div>
         </a>
-        <a>
-          <Link to='/regusers'>
-            <div className="card red">
-              <i className="fas fa-users"></i>
-              <p>Registered Users</p>
-            </div>
-          </Link>
-        </a>
+       
       </div>
     </>
   );
