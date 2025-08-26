@@ -8,7 +8,9 @@ function setUser(user) {
     {
       id: user._id,
       email: user.email,
-      role: user.a_id ? "admin" : "user"
+      role: user.a_id ? "admin" : "user",
+      name:user.name,
+      department:user.department,
     },
     JWT_SECRET,
     { expiresIn: "1h" }

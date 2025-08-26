@@ -11,6 +11,7 @@ import RetriveIssuedBooks from "./Pages/RetriveIssuedBooks/RetriveIssuedBooks";
 import AddBook from "./Pages/AddBook/AddBook";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import BooksReturn from "./Pages/BooksReturn/BooksReturn";
+import BookInfo from "./Pages/BookInfo/BookInfo";
 
 
 const MainApp = () => {
@@ -29,6 +30,7 @@ const MainApp = () => {
           <Route path="/issuedbooks" element={<RetriveIssuedBooks/>}/>
           <Route path="/addbook" element={<AddBook/>}/>
           <Route path="/register" element={<RegisterPage/>}/>
+          <Route path="/bookinfo" element={<BookInfo/>}/>
         </Routes>
       </BrowserRouter>) : <Login />}
 

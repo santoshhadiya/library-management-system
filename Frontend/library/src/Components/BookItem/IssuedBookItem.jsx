@@ -42,7 +42,14 @@ const IssuedBookItem = ({
     setIsReturn((val) => !val);
   }
 
-  const returnBookValidation = async () => {
+  const bookReturnConfirm=()=>{
+    if(confirm("Do You want to return this book ?")){
+      returnBookValidation()
+    }
+  }
+
+  const returnBookValidation = async () => {   
+      validation()
     const response = await axios.post(`${BackendURL}/issue/remove`, {
       returnBookId: returnBookId
     })
@@ -68,6 +75,7 @@ const IssuedBookItem = ({
     else {
       alert("Something went wrong. Please try again.")
     }
+    
   }
 
   return (
@@ -79,25 +87,17 @@ const IssuedBookItem = ({
         src={book_img_identify ? book_img_identify : "https://static.thenounproject.com/png/3411733-200.png"}
         alt="Book Cover"
       />
-      <p>Return ID: <span className="returnId">{returnBookId}</span></p>
+     
     </div>
     
     <div className="details">
-      <p><span>Book ID:</span> {book_id}</p>
-      <p><span></span> {s_name}</p>
-      <p><span>ID:</span> {s_id}</p>
       <p><span>From:</span> {formatDate(issue_date)}</p>
       <p><span>To:</span> {formatDate(due_date)}</p>
-      <button onClick={validation}>Return</button>
+      <button onClick={bookReturnConfirm}>Return</button>
     </div>
   </div>
 
-  {isReturn && (
-    <div className="returnFild">
-      <input type="text" value={returnBookId} readOnly />
-      <button onClick={returnBookValidation}>Submit</button>
-    </div>
-  )}
+  
 </div>
     </>
   );

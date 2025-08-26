@@ -40,15 +40,7 @@ const BooksListed = ({ isActive }) => {
     <div className={mode === "light" ? "main_body" : "dark_mode"}>
       <Nav />
       <div className="show_books_all_and_issued">
-        <div className="book_header">
-          <div className="available_books">
-            <h1>Available Books</h1>
-          </div>
-          <Link to="/issue">
-            <button>Issue Book</button>
-          </Link>
-        </div>
-
+       
         <div className="search_books">
           <input
             type="text"

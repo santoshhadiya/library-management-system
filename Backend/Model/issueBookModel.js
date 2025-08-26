@@ -5,7 +5,7 @@ const booksSchema = mongoose.Schema({
     type: String,
   },
   s_id: {
-    type: Number,
+    type: String,
   },
   email: {
     type: String,

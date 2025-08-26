@@ -665,8 +665,6 @@ input::placeholder {
   color: #333;
   background: #f3f4f6;  
   padding: 6px 12px;
-  border-radius: 20px;   
+  border-radius: 20px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
-
-

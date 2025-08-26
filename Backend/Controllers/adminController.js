@@ -7,10 +7,11 @@ async function handleAdminLogin(req, res) {
 
   if (!admin) return res.json("notFound");
 
+   console.log(admin);
   const token = setUser(admin);
 
 /*   admin = await ADMIN.find({ email, password });
-  console.log(admin); */
+  */
 
   return res.json({ message: "Login successful", token });
 }

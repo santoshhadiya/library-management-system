@@ -6,20 +6,20 @@ import { userContext } from "../../Context/Context";
 import axios from "axios";
 
 function generateUniqueText() {
- 
+
 
   const text = "qwer1tyuiopa661sd@#$fghjkl$zxcvb2345@637nmQWhd$kERTYUIOPAS731DFGHJKLZ649XCVBNM123456789@#$";
   const randomNumber = Math.floor(Math.random() * 1000);
   const startIndex = Math.floor(Math.random() * (text.length - 10));
   const randomSubstring = text.substring(startIndex, startIndex + 10);
   const uniqueText = randomSubstring + randomNumber;
-  
+
   return uniqueText;
 }
 
 
 const IssueBook = () => {
-  const { user ,mode, BackendURL} = useContext(userContext);
+  const { user, mode, BackendURL } = useContext(userContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -50,21 +50,24 @@ const IssueBook = () => {
       setLoading(false);
       return;
     }
-   //post for get quantity of book
+    //post for get quantity of book
     const bookIddata = await axios.post(`${BackendURL}/book/getid`, {
       b_id: bookIdValue,
     });
     // Update book quantity
-    const book_qua =Number(bookIddata.data);
-    if(book_qua<=0){
+    const book_qua = Number(bookIddata.data);
+    if (book_qua <= 0) {
       alert("This Book Is Not Available Due To Inseficiant Quntity");
       return;
     }
 
     // Fetch user data
     const userData = await axios.post(`${BackendURL}/user/userid`, {
-      s_id: id,
+      _id: id,
     });
+    if (userData) {
+      alert(userData)
+    }
     if (!userData.data.name) {
       alert("User ID not found!");
       setLoading(false);
@@ -85,7 +88,7 @@ const IssueBook = () => {
       b_id: bookIdValue,
       issue_date: issue,
       due_date: due,
-      returnBookId:returnBookId,
+      returnBookId: returnBookId,
     });
 
     if (response.data.val === "null") {
@@ -94,7 +97,7 @@ const IssueBook = () => {
       return;
     }
 
-    
+
     const quaResponse = await axios.post(`${BackendURL}/book/qua`, {
       b_id: bookIdValue,
       b_quantity: book_qua,
@@ -113,7 +116,7 @@ const IssueBook = () => {
   };
 
   return (
-    <div className={mode=="light"?"main_body":"dark_mode"}>
+    <div className={mode == "light" ? "main_body" : "dark_mode"}>
       <Nav />
       <section className="isuue_section">
         <div className="issue_book">

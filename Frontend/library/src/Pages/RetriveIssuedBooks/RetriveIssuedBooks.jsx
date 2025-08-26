@@ -11,13 +11,16 @@ const RetriveIssuedBooks = () => {
   const [qury, setQury] = useState("");
   const [loading, setLoading] = useState(true); 
 
-  const { mode,BackendURL } = useContext(userContext);
+  const { mode,BackendURL,user } = useContext(userContext);
 
   // Fetch data
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const res = await axios.get(`${BackendURL}/issue`);
+        const res = await axios.post(`${BackendURL}/issue/post`,{
+          s_id: user.id
+        });
+        console.log("API Response:", res.data);
         setBooks(res.data);
         setFilterUser(res.data);
       } catch (err) {
@@ -42,17 +45,8 @@ const RetriveIssuedBooks = () => {
   return (
     <div className={mode === "light" ? "main_body" : "dark_mode"}>
       <Nav />
-      <div className="available_books">
-        <h1>Issued Books</h1>
-      </div>
-
-      <div className="search_books">
-        <input
-          type="text"
-          id="search_books_input"
-          placeholder="Search"
-          onChange={(e) => setQury(e.target.value)}
-        />
+      <div className="flex items-center justify-center">
+        <h1 className="text-white text-xl">Your Borrowed Books <span className="bg-white/5 rounded-xl " style={{padding:"3px 20px"}}>{user.name.toUpperCase()}</span></h1>
       </div>
 
       <div className="retrieve_books_info" id="retrieve_books_info">
@@ -73,7 +67,7 @@ const RetriveIssuedBooks = () => {
             />
           ))
         ) : (
-          <p>Data Not Found</p> // 
+          <p>No books on your borrowed list right now</p> // 
         )}
       </div>
     </div>

@@ -10,18 +10,16 @@ import Add20Books from '../../Components/Add20Books/Add20Books'
 
 const Home = () => {
 
-  const {mode}=useContext(userContext);
+  const { mode } = useContext(userContext);
   return (
-   <>
-   
-   <div className={mode=="light"?"main_body ":"dark_mode "}>
-   <Nav/>
-   <Dashboard/>
-   <ContactSection/>
-   <Footer/>
- 
-   </div>
-   </>
+    <>
+      <div className={mode == "light" ? "main_body " : "dark_mode "}>
+        <Nav />
+        <Dashboard />
+        <ContactSection />
+        <Footer />
+      </div>
+    </>
   )
 }
 

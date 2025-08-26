@@ -6,7 +6,7 @@ const StudentDashboard = () => {
     <>
       <h2>Student Dashboard</h2>
       <div className="dashboard">
-      <a>
+        <a>
           <Link to="/books">
             <div className="card green">
               <i className="fas fa-book"></i>
@@ -23,11 +23,19 @@ const StudentDashboard = () => {
           </Link>
         </a>
         <a>
+          <Link to="/issuedbooks">
+            <div className="card green">
+              <i className="fa-solid fa-circle-up"></i>
+              <p>Issued Books</p>
+            </div>
+          </Link>
+        </a>
+        <a>
           <Link to='/authlisted'>
-          <div className="card green" id="Authors_Listed">
-            <i className="fas fa-user"></i>
-            <p>Authors Listed</p>
-          </div>
+            <div className="card green" id="Authors_Listed">
+              <i className="fas fa-user"></i>
+              <p>Authors Listed</p>
+            </div>
           </Link>
         </a>
         <a>
@@ -39,10 +47,10 @@ const StudentDashboard = () => {
         </a>
         <a>
           <Link to='/regusers'>
-          <div className="card red">
-            <i className="fas fa-users"></i>
-            <p>Registered Users</p>
-          </div>
+            <div className="card red">
+              <i className="fas fa-users"></i>
+              <p>Registered Users</p>
+            </div>
           </Link>
         </a>
       </div>

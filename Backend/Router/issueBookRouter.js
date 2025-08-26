@@ -4,7 +4,7 @@ const {setIssueBooks,sendIssuedBooks,removeById}=require("../Controllers/issueCo
 const router=express.Router();
 
 router.post("/", setIssueBooks);
-router.get("/", sendIssuedBooks);
+router.post("/post", sendIssuedBooks);
 router.post("/remove", removeById)
 
 module.exports=router;

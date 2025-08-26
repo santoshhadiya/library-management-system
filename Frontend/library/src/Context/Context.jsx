@@ -9,9 +9,12 @@ const Context = ({ children }) => {
   const [islogin, setIslogin] = useState(false);
   const [isregister, setIsregister] = useState(true);
   const [mode, setMode] = useState("light");
-
+/* 
   const BackendURL = "https://lms-backend-ri7r.onrender.com";
-  const MongoURL = "https://lms-backend-ri7r.onrender.com/book";
+  const MongoURL = "https://lms-backend-ri7r.onrender.com/book"; */
+
+  const BackendURL = "http://localhost:5000";
+  const MongoURL = "http://localhost:5000/book";
 
   //  Check token on app load
   useEffect(() => {

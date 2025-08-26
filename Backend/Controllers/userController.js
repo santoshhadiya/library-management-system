@@ -45,14 +45,17 @@ async function sendUserdata(req,res){
 }
 
 async function sendUserWithId(req,res){
-  const {s_id}=req.body
-  const userData=await USER.findOne({s_id});
-
+  const {_id}=req.body
+  if(!_id){
+    console.log("ID missing")
+  }
+const userData = await USER.findById(_id);
+  
   if (!userData) {
     return res.json({ message: "404" });
   }
 
-  res.json(userData);
+  res.json(userData); 
 }
 
 module.exports = {

@@ -11,7 +11,7 @@ const bookData=await BOOKS.findOne({b_id:b_id});
       email,
       department,
       b_id,
-      issue_date,
+      issue_date, 
       due_date,
       returnBookId
     });
@@ -24,7 +24,9 @@ const bookData=await BOOKS.findOne({b_id:b_id});
 };
 
 const sendIssuedBooks=async(req,res)=>{
-    const data=await ISSUE.find({});
+  const {s_id}=req.body;
+    const data=await ISSUE.find({s_id});
+    
     res.json(data);
     
 }

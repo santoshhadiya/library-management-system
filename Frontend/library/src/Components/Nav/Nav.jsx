@@ -39,7 +39,11 @@ export const Nav = () => {
               <a href="#">Reg Students</a>
             </li>
           </Link>
-
+          <Link to="/issuedbooks">
+            <li>
+              <a href="#">Issued Books</a>
+            </li>
+          </Link>
           {/* ✅ check role instead of user string */}
           {user?.role === "admin" && (
             <>
@@ -48,11 +52,7 @@ export const Nav = () => {
                   <a href="#">Add Book</a>
                 </li>
               </Link>
-              <Link to="/issuedbooks">
-                <li>
-                  <a href="#">Issued Books</a>
-                </li>
-              </Link>
+
               <li>
                 <a href="#">Books Return</a>
               </li>
