@@ -1,22 +1,23 @@
 const ISSUE = require("../Model/issueBookModel");
 const BOOKS = require("../Model/booksModel");
-const RETURN_HIST = require("../Model/returnHistModel")
-const ADD_BOOK_HIST=require("../Model/bookAddHistModel")
-const BORROW=require("../Model/borrowHistModel")
+const BOOK_HIST = require("../Model/HistModel");
 
-const addHistory=(req,res)=>{
-   const {a_id,b_id,date}=req.body;
+const addHistory = (req, res) => {
+  const { entity_id, entity_type, book_id, date, task,name } = req.body;
 
-   const result=ADD_BOOK_HIST.create({
-    a_id,
-    b_id,
-    date
-   })
-}
+  const result = BOOK_HIST.create({
+    entity_id,
+    entity_type,
+    book_id,
+    date,
+    task,
+    name,
+  });
+};
 
-const send_Add_Hist_Data = async (req, res) => {
+const send_Hist_Data = async (req, res) => {
   try {
-    const data = await ADD_BOOK_HIST.find(); // wait for data
+    const data = await BOOK_HIST.find(); // wait for data
     res.json(data); // send as JSON
   } catch (error) {
     console.error("Error fetching add history:", error);
@@ -24,7 +25,7 @@ const send_Add_Hist_Data = async (req, res) => {
   }
 };
 
-module.exports={
+module.exports = {
   addHistory,
-  send_Add_Hist_Data
-}
+  send_Hist_Data,
+};

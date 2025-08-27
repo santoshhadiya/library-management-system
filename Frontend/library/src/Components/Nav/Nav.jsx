@@ -29,11 +29,6 @@ export const Nav = () => {
           <li>
             <a href="#">Categories</a>
           </li>
-          <Link to="/issue">
-            <li>
-              <a href="#">Issue Books</a>
-            </li>
-          </Link>
 
           <Link to="/issuedbooks">
             <li>
@@ -53,15 +48,12 @@ export const Nav = () => {
                   <a href="#">Reg Students</a>
                 </li>
               </Link>
-              <li>
-                <a href="#">Books Return</a>
-              </li>
-              <li>
-                <a href="#">Remove All Books</a>
-              </li>
-              <li>
-                <a href="#">Change Password</a>
-              </li>
+              <Link to="/changePassword">
+                <li>
+                  <a href="#">Change Password</a>
+                </li> 
+              </Link>
+
             </>
           )}
         </ul>

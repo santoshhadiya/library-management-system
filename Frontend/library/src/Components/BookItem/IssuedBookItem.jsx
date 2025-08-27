@@ -17,7 +17,7 @@ const IssuedBookItem = ({
   const [isReturn, setIsReturn] = useState(false);
   const navigate = useNavigate();
 
-   const {BackendURL}=useContext(userContext)
+  const { BackendURL, user } = useContext(userContext)
 
 
   useEffect(() => {
@@ -42,14 +42,14 @@ const IssuedBookItem = ({
     setIsReturn((val) => !val);
   }
 
-  const bookReturnConfirm=()=>{
-    if(confirm("Do You want to return this book ?")){
+  const bookReturnConfirm = () => {
+    if (confirm("Do You want to return this book ?")) {
       returnBookValidation()
     }
   }
 
-  const returnBookValidation = async () => {   
-      validation()
+  const returnBookValidation = async () => {
+    validation()
     const response = await axios.post(`${BackendURL}/issue/remove`, {
       returnBookId: returnBookId
     })
@@ -66,39 +66,62 @@ const IssuedBookItem = ({
         b_quantity: book_qua,
       });
 
+
+
       if (quaResponse.data.val == "ok") {
 
         alert("Book removed successfully!");
         navigate("/"); // Navigate to the home
+
+        const res = await axios.post(`${BackendURL}/hist/return`, {
+          entity_id: user.id,
+          entity_type: user.role,
+          book_id: book_id,
+          date: Date.now(),
+          task: "return",
+          name: user.name,
+        })
       }
     }
     else {
       alert("Something went wrong. Please try again.")
     }
-    
+
   }
 
   return (
     <>
-     <div className="book_info">
-  <div className="boxOfReturnBooks">
-    <div className="box_img_issued">
-      <img
-        src={book_img_identify ? book_img_identify : "https://static.thenounproject.com/png/3411733-200.png"}
-        alt="Book Cover"
-      />
-     
-    </div>
-    
-    <div className="details">
-      <p><span>From:</span> {formatDate(issue_date)}</p>
-      <p><span>To:</span> {formatDate(due_date)}</p>
-      <button onClick={bookReturnConfirm}>Return</button>
-    </div>
-  </div>
+      <div className="book_info">
+        <div className="boxOfReturnBooks">
+          <div className="box_img_issued">
+            <img
+              src={book_img_identify ? book_img_identify : "https://static.thenounproject.com/png/3411733-200.png"}
+              alt="Book Cover"
+            />
 
-  
-</div>
+          </div>
+          {
+            user.role == "user" ? (<div className="details">
+              <p><span>From:</span> {formatDate(issue_date)}</p>
+              <p><span>To:</span> {formatDate(due_date)}</p>
+              <button onClick={bookReturnConfirm}>Return</button>
+            </div>) :
+              (<div className="details">
+                <p><span>Book ID:</span> {book_id}</p>
+                <p> <span>Student Name:</span> {s_name} </p>
+                <p> <span>Student ID: </span> {s_id}</p>
+                <p> <span>Issue Date:</span> {formatDate(issue_date)}</p>
+                <p><span>Return Date:</span> {formatDate(due_date)}</p>
+                
+              </div>)
+          }
+
+
+
+        </div>
+
+
+      </div>
     </>
   );
 };

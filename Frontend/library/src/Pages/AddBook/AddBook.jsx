@@ -73,9 +73,12 @@ const AddBook = () => {
     
    if(respons){
      const res = await axios.post(`${BackendURL}/hist/add`, {
-      a_id: user.id,
-      b_id: b_id,
-      date: Date.now()
+      entity_id: user.id,
+      entity_type:"admin",
+      book_id: b_id,
+      date: Date.now(),
+      task:"add",
+      name:user.name,
     })
    }
   };

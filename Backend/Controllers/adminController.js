@@ -31,4 +31,26 @@ async function sendAdmindata(req, res) {
   res.json(userData);
 }
 
-module.exports = { handleAdminLogin, handleAdminSignup, sendAdmindata };
+const changePassword = async (req, res) => {
+  try {
+    const { email, oldPassword, newPassword } = req.body;
+
+   
+    const admin = await ADMIN.findOne({ email, password: oldPassword });
+
+    if (!admin) {
+      return res.status(400).json({ message: "Invalid email or old password" });
+    }
+
+    // Update password
+    admin.password = newPassword;
+    await admin.save();
+
+    res.status(200).json({ message: "Password updated successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+};
+
+
+module.exports = { handleAdminLogin, handleAdminSignup, sendAdmindata ,changePassword};

@@ -100,6 +100,7 @@ nav {
   top: 0;
   z-index: 90;
   backdrop-filter: blur(5px);
+
 }
 
 nav ul {
@@ -111,6 +112,8 @@ nav ul {
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  align-items: center;
+  justify-content: center;
 }
 
 nav ul::-webkit-scrollbar {

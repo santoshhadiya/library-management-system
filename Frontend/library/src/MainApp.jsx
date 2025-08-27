@@ -13,6 +13,8 @@ import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import BooksReturn from "./Pages/BooksReturn/BooksReturn";
 import BookInfo from "./Pages/BookInfo/BookInfo";
 import HistoryData from "./Pages/HistoryData/HistoryData";
+import { UpdateBook } from "./Pages/UpdateBook/UpdateBook";
+import PasswordChange from "./Components/Login/PasswordChange";
 
 
 const MainApp = () => {
@@ -25,7 +27,7 @@ const MainApp = () => {
         <Routes>
           <Route path="/books" element={<BooksListed />}/>
           <Route path="/" element={<Home />}/>
-          <Route path="/issue" element={<IssueBook />}/>
+          {/* <Route path="/issue" element={<IssueBook />}/> */}
           <Route path="/regusers" element={<RegisteredUsers />}/>
           <Route path="/authlisted" element={<AuthListed />}/>
           <Route path="/issuedbooks" element={<RetriveIssuedBooks/>}/>
@@ -33,6 +35,9 @@ const MainApp = () => {
           <Route path="/register" element={<RegisterPage/>}/>
           <Route path="/bookinfo" element={<BookInfo/>}/>
           <Route path="/historyData" element={<HistoryData/>}/>
+          <Route path="/updateBook" element={<UpdateBook/>}/>
+          <Route path="/changePassword" element={<PasswordChange/>}/>
+          
         </Routes>
       </BrowserRouter>) : <Login />}
 

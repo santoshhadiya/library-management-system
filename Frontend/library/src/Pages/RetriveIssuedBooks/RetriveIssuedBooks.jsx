@@ -17,7 +17,12 @@ const RetriveIssuedBooks = () => {
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const res = await axios.post(`${BackendURL}/issue/post`,{
+        const endpoint =
+        user.role == "admin"
+          ? `${BackendURL}/issue/post-admin` 
+          : `${BackendURL}/issue/post`;
+
+        const res = await axios.post(endpoint,{
           s_id: user.id
         });
         console.log("API Response:", res.data);

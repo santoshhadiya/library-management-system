@@ -12,19 +12,19 @@ const BooksListed = ({ isActive }) => {
   const [books, setBooks] = useState([]);
   const [filterdBooks, setFilterdBooks] = useState([]);
   const [qury, setQury] = useState("");
-  const [loading, setLoading] = useState(true); // 👈 loading state
+  const [loading, setLoading] = useState(true);
 
-  // Fetch from database
+  // Fetch 
   useEffect(() => {
     axios.get(MongoURL)
       .then((res) => {
         setBooks(res.data);
         setFilterdBooks(res.data);
-        setLoading(false); // ✅ stop loading when data is received
+        setLoading(false); // stop loading 
       })
       .catch((err) => {
         console.log(err);
-        setLoading(false); // ✅ stop loading on error too
+        setLoading(false); // stop loading on error 
       });
   }, []);
 
@@ -52,9 +52,10 @@ const BooksListed = ({ isActive }) => {
         </div>
 
         <div className="show_books" id="show_books">
+          {console.log(filterdBooks)}
           {
             loading ? (
-              <p>Loading...</p> // 👈 Show this while loading
+              <p>Loading...</p> 
             ) : filterdBooks.length > 0 ? (
               filterdBooks.map((book, index) => (
                 book.b_img &&
@@ -62,11 +63,13 @@ const BooksListed = ({ isActive }) => {
                   key={index}
                   title={book.b_name}
                   img={book.b_img}
-                  id={book.b_id}
+                  id={book.b_id} 
                   desc={book.b_desc}
                   que={book.b_quantity}
                   author={book.b_author}
+                  b_price={book.b_price || 399}
                 />
+
               ))
             ) : (
               <p>No Book Found "{qury}"</p>
