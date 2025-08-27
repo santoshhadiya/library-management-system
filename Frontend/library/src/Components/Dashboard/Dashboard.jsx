@@ -5,7 +5,6 @@ import AdminDashboard from './AdminDashboard';
 
 const Dashboard = () => {
   const { user } = useContext(userContext);
-
   return (
     <main>
       {user?.role === "user" ? (
