@@ -6,7 +6,6 @@ import RegisterPage from "../../Pages/RegisterPage/RegisterPage";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
-
 const Login = () => {
   const { user, setUser, setIslogin, isregister, setIsregister, BackendURL } = useContext(userContext);
 
@@ -105,7 +104,25 @@ const Login = () => {
             {errMsg && <p className="errMsg">{errMsg}</p>}
 
             <button type="submit" className="login-btn" disabled={loading}>
-              {loading ? "Logging in..." : "Login"}
+              {loading ? (
+                <div style={{display:"flex", alignItems:"center",}}>
+                  
+                  <span style={{ marginLeft:"9%", position:"fixed"}}> Logging in...</span>
+                  <img 
+                    src="https://cdn.pixabay.com/animation/2023/11/30/10/11/10-11-02-622_512.gif" 
+                    alt="loading..." 
+                    className="loader-gif"
+                    style={{
+                      width:"25px",
+                      
+                      position:"relative",
+                      right:"-300px"
+                    }}
+                  />
+                </div>
+              ) : (
+                "Login"
+              )}
             </button>
           </form>
           <a onClick={() => setIsregister(false)} className="register_here">
