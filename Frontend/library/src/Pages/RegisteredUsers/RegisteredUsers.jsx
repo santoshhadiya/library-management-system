@@ -9,34 +9,28 @@ const RegisteredUsers = () => {
   const [user, setUser] = useState([]);
   const [admin, setAdmin] = useState([]);
   const [filterUser, setFilterUser] = useState([]);
-  const [qury, setQury] = useState([]);
+  const [qury, setQury] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  const {mode,BackendURL}=useContext(userContext);
+  const { mode, BackendURL, gifImg } = useContext(userContext);
+
   useEffect(() => {
-    /* const userData = JSON.parse(localStorage.getItem("issueBooksData")) || [];
-    setUser(userData);
- */
     const fetchdata = async () => {
-      await axios
-        .get(`${BackendURL}/user`)
-        .then((res) => {
-          setUser(res.data), setFilterUser(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      try {
+        const userRes = await axios.get(`${BackendURL}/user`);
+        setUser(userRes.data);
+        setFilterUser(userRes.data);
 
-      await axios
-        .get(`${BackendURL}/admin`)
-        .then((res) => {
-          setAdmin(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        const adminRes = await axios.get(`${BackendURL}/admin`);
+        setAdmin(adminRes.data);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchdata();
-  }, []);
+  }, [BackendURL]);
 
   useEffect(() => {
     const filter = user.filter((val) => {
@@ -45,66 +39,75 @@ const RegisteredUsers = () => {
       );
     });
     setFilterUser(filter);
-  }, [qury]);
+  }, [qury, user]);
+
   return (
-    <div className={mode=="light"?"main_body":"dark_mode"}>
+    <div className={mode === "light" ? "main_body" : "dark_mode"}>
       <Nav />
       <section className="rg_user">
-        <div class="Registered_Users_info" id="Registered_Users_info">
-
-          <div className="search_books">
-            <input
-              type="text"
-              id="search_books_input"
-              placeholder="Search"
-              onChange={(e) => setQury(e.target.value)}
-            />
-          </div>
-          <h2>Students </h2>
-          <table>
-            <thead>
-              <tr>
-                <td>ID</td>
-                <td>Name</td>
-                <td>Email</td>
-                {/* <td>Password</td> */}
-              </tr>
-            </thead>
-            {filterUser.map((val) => {
-              return (
-                <UserItem
-                  key={val.s_id}
-                  id={val.s_id}
-                  name={val.name}
-                  email={val.email}
-                  password={val.password}
+        <div className="Registered_Users_info" id="Registered_Users_info">
+          {loading ? (
+            <div style={{display:"flex", textAlign: "center", marginTop: "20px",alignItems:"center", justifyContent:"center" }}>
+              <img
+                src={gifImg}
+                alt="loading..."
+                className="loader-gif"
+                style={{ width: "30px", height: "30px", marginBottom: "10px" }}
+              />
+             
+            </div>
+          ) : (
+            <>
+              <div className="search_books">
+                <input
+                  type="text"
+                  id="search_books_input"
+                  placeholder="Search"
+                  onChange={(e) => setQury(e.target.value)}
                 />
-              );
-            })}
-          </table>
+              </div>
 
-          <h2>Admins </h2>
-          <table>
-            <thead>
-              <tr>
-                <td>ID</td>
-                <td>Name</td>
-                <td>Email</td>
-               {/*  <td>Password</td> */}
-              </tr>
-            </thead>
-            {admin.map((val) => {
-              return (
-                <UserItem
-                  key={val.s_id}
-                  id={val.a_id}
-                  name={val.name}
-                  email={val.email}
-                  password={val.password}
-                />
-              );
-            })}
-          </table>
+              <h2>Students </h2>
+              <table>
+                <thead>
+                  <tr>
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Email</td>
+                  </tr>
+                </thead>
+                {filterUser.map((val) => (
+                  <UserItem
+                    key={val.s_id}
+                    id={val.s_id}
+                    name={val.name}
+                    email={val.email}
+                    password={val.password}
+                  />
+                ))}
+              </table>
+
+              <h2>Admins </h2>
+              <table>
+                <thead>
+                  <tr>
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Email</td>
+                  </tr>
+                </thead>
+                {admin.map((val) => (
+                  <UserItem
+                    key={val.a_id}
+                    id={val.a_id}
+                    name={val.name}
+                    email={val.email}
+                    password={val.password}
+                  />
+                ))}
+              </table>
+            </>
+          )}
         </div>
       </section>
     </div>

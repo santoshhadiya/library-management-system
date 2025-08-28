@@ -10,6 +10,8 @@ const Context = ({ children }) => {
   const [isregister, setIsregister] = useState(true);
   const [mode, setMode] = useState("light");
 
+  const gifImg="https://cdn.pixabay.com/animation/2023/11/30/10/11/10-11-02-622_512.gif"
+
   const BackendURL = "https://lms-backend-ri7r.onrender.com";
   const MongoURL = "https://lms-backend-ri7r.onrender.com/book"; 
   
@@ -57,6 +59,7 @@ const Context = ({ children }) => {
         mode,
         setMode,
         BackendURL,
+        gifImg,
       }}
     >
       {children}

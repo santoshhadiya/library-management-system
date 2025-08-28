@@ -4,9 +4,9 @@ import { userContext } from "../../Context/Context";
 import axios from "axios";
 
 const RegisterPage = () => {
-  const { setIsregister, mode,BackendURL } = useContext(userContext);
+  const { setIsregister, mode,BackendURL,gifImg } = useContext(userContext);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [loading, setLoading] = useState(false); // 👈 Loading state
+  const [loading, setLoading] = useState(false); // Loading state
 
   const [formData, setFormData] = useState({
     name: "",
@@ -135,8 +135,25 @@ const RegisterPage = () => {
             />
           </div>
 
-          <button type="submit" className="register-button" disabled={loading}>
-            {loading ? "Registering..." : "Register"}
+          
+
+           <button type="submit" className="register-button" disabled={loading}>
+            {loading ? (
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <img
+                  src={gifImg}
+                  alt="loading..."
+                  className="loader-gif"
+                  style={{
+                    width: "25px",
+                    position: "relative",
+
+                  }}
+                />
+              </div>
+            ) : (
+              "Register"
+            )}
           </button>
         </form>
       </div>

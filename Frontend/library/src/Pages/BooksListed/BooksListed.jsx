@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 
 const BooksListed = ({ isActive }) => {
-  const { MongoURL, mode } = useContext(userContext);
+  const { MongoURL, mode,gifImg } = useContext(userContext);
 
   const [books, setBooks] = useState([]);
   const [filterdBooks, setFilterdBooks] = useState([]);
@@ -40,7 +40,7 @@ const BooksListed = ({ isActive }) => {
     <div className={mode === "light" ? "main_body" : "dark_mode"}>
       <Nav />
       <div className="show_books_all_and_issued">
-       
+
         <div className="search_books">
           <input
             type="text"
@@ -55,7 +55,20 @@ const BooksListed = ({ isActive }) => {
           {console.log(filterdBooks)}
           {
             loading ? (
-              <p>Loading...</p> 
+              <>
+                
+                <img
+                  src={gifImg}
+                  alt="loading..."
+                  className="loader-gif"
+                  style={{
+                    width: "30px",
+                    height:"30px",
+                    position: "relative",
+
+                  }}
+                />
+              </>
             ) : filterdBooks.length > 0 ? (
               filterdBooks.map((book, index) => (
                 book.b_img &&
@@ -63,7 +76,7 @@ const BooksListed = ({ isActive }) => {
                   key={index}
                   title={book.b_name}
                   img={book.b_img}
-                  id={book.b_id} 
+                  id={book.b_id}
                   desc={book.b_desc}
                   que={book.b_quantity}
                   author={book.b_author}

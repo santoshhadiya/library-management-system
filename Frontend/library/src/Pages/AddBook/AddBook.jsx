@@ -6,8 +6,7 @@ import axios from "axios";
 import { userContext } from "../../Context/Context";
 
 const AddBook = () => {
-
-  const { MongoURL, mode, BackendURL, user } = useContext(userContext)
+  const { MongoURL, mode, BackendURL, user, gifImg } = useContext(userContext);
   const navigate = useNavigate();
 
   const name = useRef();
@@ -18,8 +17,11 @@ const AddBook = () => {
   const que = useRef();
   const img = useRef();
 
+  const [loading, setLoading] = useState(false);
+
   const handleFormValidation = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const b_name = name.current.value.trim();
     const b_id = id.current.value;
@@ -41,46 +43,41 @@ const AddBook = () => {
 
     if (!newBook) {
       alert("Enter All Data");
+      setLoading(false);
       return;
     }
 
-    /*  const books = JSON.parse(localStorage.getItem("react_books")) || [];
-     books.push(newBook);
-     localStorage.setItem("react_books", JSON.stringify(books));
-  */
+    try {
+      const respons = await axios.post(MongoURL, newBook);
 
-    const respons = await axios.post(MongoURL, {
-      b_name: b_name,
-      b_id: b_id,
-      b_author: b_author,
-      b_price: b_price,
-      b_desc: b_desc,
-      b_quantity: b_que,
-      b_img: b_img,
-    })
+      console.log(newBook);
+      alert(`Books Added Succesfully! `);
 
-    console.log(newBook);
-    alert(`Books Added Succesfully! `);
-    
-    name.current.value = "";
-    id.current.value = "";
-    auth_name.current.value = "";
-    price.current.value = "";
-    desc.current.value = "";
-    que.current.value = "";
-    img.current.value = "";
-    navigate("/books");
-    
-   if(respons){
-     const res = await axios.post(`${BackendURL}/hist/add`, {
-      entity_id: user.id,
-      entity_type:"admin",
-      book_id: b_id,
-      date: Date.now(),
-      task:"add",
-      name:user.name,
-    })
-   }
+      name.current.value = "";
+      id.current.value = "";
+      auth_name.current.value = "";
+      price.current.value = "";
+      desc.current.value = "";
+      que.current.value = "";
+      img.current.value = "";
+      navigate("/books");
+
+      if (respons) {
+        await axios.post(`${BackendURL}/hist/add`, {
+          entity_id: user.id,
+          entity_type: "admin",
+          book_id: b_id,
+          date: Date.now(),
+          task: "add",
+          name: user.name,
+        });
+      }
+    } catch (error) {
+      console.error("Error adding book:", error);
+      alert("Failed to add book. Try again.");
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -96,74 +93,41 @@ const AddBook = () => {
               <div className="row1">
                 <div>
                   <label htmlFor="book_name">Book Name:</label>
-                  <input
-                    ref={name}
-                    type="text"
-                    id="book_name"
-                    name="book_name"
-                    required
-                  />
+                  <input ref={name} type="text" id="book_name" name="book_name" required />
                 </div>
                 <div>
                   <label htmlFor="book_id">Book ID:</label>
-                  <input
-                    ref={id}
-                    type="number"
-                    id="book_id"
-                    name="book_id"
-                    required
-                  />
+                  <input ref={id} type="number" id="book_id" name="book_id" required />
                 </div>
               </div>
               <label htmlFor="author_name">Author Name:</label>
-              <input
-                ref={auth_name}
-                type="text"
-                id="author_name"
-                name="author_name"
-                required
-              />
+              <input ref={auth_name} type="text" id="author_name" name="author_name" required />
 
               <label htmlFor="book_price">Price:</label>
-              <input
-                ref={price}
-                type="number"
-                id="book_price"
-                name="book_price"
-                required
-              />
+              <input ref={price} type="number" id="book_price" name="book_price" required />
 
               <label htmlFor="book_description">Description:</label>
-              <textarea
-                ref={desc}
-                id="book_description"
-                name="book_description"
-                rows="4"
-                cols="48"
-                required
-              ></textarea>
+              <textarea ref={desc} id="book_description" name="book_description" rows="4" cols="48" required></textarea>
 
               <label htmlFor="book_quantity">Quantity:</label>
-              <input
-                ref={que}
-                type="number"
-                id="book_quantity"
-                name="book_quantity"
-                required
-              />
+              <input ref={que} type="number" id="book_quantity" name="book_quantity" required />
 
               <label htmlFor="book_img_link">Link of Img:</label>
-              <input
-                ref={img}
-                type="url"
-                id="book_img_link"
-                name="book_img_link"
-                placeholder="Enter URL"
-                required
-              />
+              <input ref={img} type="url" id="book_img_link" name="book_img_link" placeholder="Enter URL" required />
 
-              <button type="submit" id="submitBook">
-                Submit
+              <button type="submit" id="submitBook" disabled={loading}>
+                {loading ? (
+                  <div style={{display:"flex",alignItems:"center", justifyContent:"center"}}>
+                    <img
+                      src={gifImg}
+                      alt="loading..."
+                      className="loader-gif"
+                      style={{ width: "25px", height: "25px", marginRight: "8px" }}
+                    />
+                  </div>
+                ) : (
+                  "Submit"
+                )}
               </button>
             </form>
           </div>

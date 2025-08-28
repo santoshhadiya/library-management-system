@@ -7,7 +7,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const PasswordChange = () => {
-  const { user, BackendURL } = useContext(userContext);
+  const { user, BackendURL,gifImg } = useContext(userContext);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -25,7 +25,7 @@ const PasswordChange = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   // handle password change
   const handlePasswordChange = async (e) => {
     e.preventDefault();
@@ -42,7 +42,7 @@ const PasswordChange = () => {
     try {
       const endpoint =
         user.role == "admin"
-          ? `${BackendURL}/admin/change-password` 
+          ? `${BackendURL}/admin/change-password`
           : `${BackendURL}/user/change-password`;
 
       const response = await axios.post(endpoint, {
@@ -137,11 +137,29 @@ const PasswordChange = () => {
             />
           </div>
 
-          {errMsg && <p className="errMsg" style={{backgroundColor:"green"}}>{errMsg}</p>}
-          {successMsg && <p className="successMsg" style={{backgroundColor:"green"}}>{successMsg}</p>}
+          {errMsg && <p className="errMsg" style={{ backgroundColor: "green" }}>{errMsg}</p>}
+          {successMsg && <p className="successMsg" style={{ backgroundColor: "green" }}>{successMsg}</p>}
+
+
+
 
           <button type="submit" className="login-btn" disabled={loading}>
-            {loading ? "Changing..." : "Change Password"}
+            {loading ? (
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <img
+                  src={gifImg}
+                  alt="loading..."
+                  className="loader-gif"
+                  style={{
+                    width: "25px",
+                    position: "relative",
+
+                  }}
+                />
+              </div>
+            ) : (
+              "Change Password"
+            )}
           </button>
         </form>
       </div>

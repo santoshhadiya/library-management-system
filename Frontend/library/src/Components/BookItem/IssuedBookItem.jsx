@@ -95,18 +95,19 @@ const IssuedBookItem = ({
         <div className="boxOfReturnBooks">
           <div className="box_img_issued">
             <img
-              src={book_img_identify ? book_img_identify : "https://static.thenounproject.com/png/3411733-200.png"}
+              src={book_img_identify ? book_img_identify : "https://media.istockphoto.com/id/1415203156/vector/error-page-page-not-found-vector-icon-in-line-style-design-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=RuQ_sn-RjAVNKOmARuSf1oXFkVn3OMKeqO5vw8GYoS8="}
               alt="Book Cover"
+              style={{height:"120px", width:"200px", objectFit:"fill"}}
             />
 
           </div>
           {
-            user.role == "user" ? (<div className="details">
+            user.role == "user" ? (<div className="details" >
               <p><span>From:</span> {formatDate(issue_date)}</p>
               <p><span>To:</span> {formatDate(due_date)}</p>
               <button onClick={bookReturnConfirm}>Return</button>
             </div>) :
-              (<div className="details">
+              (<div className="details" >
                 <p><span>Book ID:</span> {book_id}</p>
                 <p> <span>Student Name:</span> {s_name} </p>
                 <p> <span>Student ID: </span> {s_id}</p>

@@ -7,7 +7,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
-  const { user, setUser, setIslogin, isregister, setIsregister, BackendURL } = useContext(userContext);
+  const { user, setUser, setIslogin, isregister, setIsregister, BackendURL,gifImg } = useContext(userContext);
 
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errMsg, setErrMsg] = useState("");
@@ -109,7 +109,7 @@ const Login = () => {
                   
                   <span style={{ marginLeft:"9%", position:"fixed"}}> Logging in...</span>
                   <img 
-                    src="https://cdn.pixabay.com/animation/2023/11/30/10/11/10-11-02-622_512.gif" 
+                    src={gifImg}
                     alt="loading..." 
                     className="loader-gif"
                     style={{

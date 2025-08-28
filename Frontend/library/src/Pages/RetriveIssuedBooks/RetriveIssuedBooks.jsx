@@ -11,7 +11,7 @@ const RetriveIssuedBooks = () => {
   const [qury, setQury] = useState("");
   const [loading, setLoading] = useState(true); 
 
-  const { mode,BackendURL,user } = useContext(userContext);
+  const { mode,BackendURL,user,gifImg } = useContext(userContext);
 
   // Fetch data
   useEffect(() => {
@@ -56,7 +56,17 @@ const RetriveIssuedBooks = () => {
 
       <div className="retrieve_books_info" id="retrieve_books_info">
         {loading ? (
-          <p>Loading...</p>
+          <img
+                  src={gifImg}
+                  alt="loading..."
+                  className="loader-gif"
+                  style={{
+                    width: "30px",
+                    height:"30px",
+                    position: "relative",
+
+                  }}
+                />
         ) : filterUser.length > 0 ? (
           filterUser.map((book2) => (
             <IssuedBookItem
