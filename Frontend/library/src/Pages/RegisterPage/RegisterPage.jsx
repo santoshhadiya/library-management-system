@@ -5,7 +5,7 @@ import axios from "axios";
 
 const RegisterPage = () => {
   const { setIsregister, mode,BackendURL,gifImg } = useContext(userContext);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
   const [loading, setLoading] = useState(false); // Loading state
 
   const [formData, setFormData] = useState({
@@ -26,7 +26,7 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // 👈 Start loading
+    setLoading(true); //Start loading
 
     try {
       let response = "";
