@@ -93,7 +93,7 @@ const RegisterPage = () => {
           <div className="form-group">
             <label htmlFor="s_id">{isAdmin ? "Admin ID" : "Student ID"}</label>
             <input
-              type="text"
+              type="number"
               id="s_id"
               name="s_id"
               value={formData.s_id}
